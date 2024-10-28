@@ -40,14 +40,14 @@ export async function POST(request: Request) {
     
     // 创建 canvas
     const canvas = createCanvas(217, 217);
-    const ctx = canvas.getContext('2d');
+    const ctx  = canvas.getContext('2d');
     
     // 处理每张图片
     for (const url of imageUrls) {
       const publicPath = path.join(process.cwd(), 'public', url.split('/').pop()!)
       const image = await loadImage(publicPath)
       ctx.drawImage(image, 0, 0, 217, 217);
-      encoder.addFrame(ctx);
+      encoder.addFrame(ctx as unknown as CanvasRenderingContext2D);
     }
     
     encoder.finish();
