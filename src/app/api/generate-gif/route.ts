@@ -8,7 +8,7 @@ import path from 'path'
 export const dynamic = 'force-dynamic';
 
 // 处理 OPTIONS 请求（用于 CORS）
-export async function OPTIONS(request: Request) {
+export async function OPTIONS() {
     return new NextResponse(null, {
         status: 200,
         headers: {
@@ -63,7 +63,7 @@ export async function POST(request: Request) {
           'Content-Disposition': 'attachment; filename="generated.gif"',
       },
   });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch {
+    return NextResponse.json({ error: '返回出错'}, { status: 500 });
   }
 }
