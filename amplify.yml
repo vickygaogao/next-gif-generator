@@ -7,7 +7,7 @@ frontend:
     build:
       commands:
         # 构建前清理缓存
-        - npx next clean
+        - rm -rf .next/cache
         - npm run build
   artifacts:
     baseDirectory: .next
