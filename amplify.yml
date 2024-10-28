@@ -6,18 +6,24 @@ frontend:
         - npm ci
     build:
       commands:
-        # 构建前清理缓存
         - rm -rf .next/cache
         - npm run build
   artifacts:
     baseDirectory: .next
     files:
-      - '**/*'
+      - static/**/*
+      - server/**/*.json
+      - build-manifest.json
+      - react-loadable-manifest.json
+      - routes-manifest.json
+      - required-server-files.json
+      - package.json
     exclude:
-      # 排除缓存目录
-      - 'cache/**/*'
+      - cache/**/*
+      - '**/*.map'
+      - server/pages/api/**
+      - server/chunks/**
+      - '**/*.nft.json'
   cache:
     paths:
       - node_modules/**/*
-      # 可以完全移除 .next/cache 的缓存
-      # - .next/cache/**/*

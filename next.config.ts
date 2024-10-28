@@ -9,7 +9,9 @@ const nextConfig: NextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
-  output: 'standalone',
+  experimental: {
+    optimizeCss: true,
+  },
 };
 
 export default nextConfig;
