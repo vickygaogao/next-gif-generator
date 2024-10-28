@@ -3,21 +3,22 @@ frontend:
   phases:
     preBuild:
       commands:
-        - echo "Starting preBuild phase..."
-        - npm install
+        - npm ci
     build:
       commands:
-        - echo "Starting build phase..."
         - npm run build
-        - echo "Build completed!"
-        - echo "Contents of the .next directory:"
-        - ls -la .next
-        - echo "Build output:"
-        - cat .next/BUILD_ID # 打印特定的文件内容以进行调试
   artifacts:
     baseDirectory: .next
     files:
-      - '**/*'
+      # 只包含必要文件
+      - 'server/**/*'
+      - 'static/**/*'
+      - 'standalone/**/*'
+      - 'static-pages/**/*'
+      - 'required-server-files.json'
+      - 'package.json'
+    discard-paths: no
   cache:
     paths:
       - node_modules/**/*
+      - .next/cache/**/*
