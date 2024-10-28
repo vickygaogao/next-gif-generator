@@ -6,19 +6,18 @@ frontend:
         - npm ci
     build:
       commands:
+        # 构建前清理缓存
+        - npx next clean
         - npm run build
   artifacts:
     baseDirectory: .next
     files:
-      # 只包含必要文件
-      - 'server/**/*'
-      - 'static/**/*'
-      - 'standalone/**/*'
-      - 'static-pages/**/*'
-      - 'required-server-files.json'
-      - 'package.json'
-    discard-paths: no
+      - '**/*'
+    exclude:
+      # 排除缓存目录
+      - 'cache/**/*'
   cache:
     paths:
       - node_modules/**/*
-      - .next/cache/**/*
+      # 可以完全移除 .next/cache 的缓存
+      # - .next/cache/**/*
